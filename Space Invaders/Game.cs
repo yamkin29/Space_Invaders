@@ -14,6 +14,7 @@ public class Game
     private readonly EnemyManager _enemyManager;
     private readonly CollisionHandler _collisionHandler;
     private readonly AnimationManager _animationManager;
+    private readonly ScoreManager _scoreManager;
 
     // Создаем котнструктор класса и переносим в него всю логику включения
     public Game(GameConfiguration gameConfiguration)
@@ -30,7 +31,10 @@ public class Game
         var screenSize = new Vector2f(gameConfiguration.Width, gameConfiguration.Height);
         _animationManager = new AnimationManager();
         _enemyManager = new EnemyManager(gameConfiguration.EnemySpawnCooldown, gameConfiguration.EnemySpeed, screenSize, _animationManager);
-        _collisionHandler = new CollisionHandler(_player, _enemyManager);
+        
+        _scoreManager = new ScoreManager(gameConfiguration.ScoreManagerSettings);
+        
+        _collisionHandler = new CollisionHandler(_player, _enemyManager, _scoreManager);
     }
 
 
@@ -93,6 +97,7 @@ public class Game
         _player.Draw(_window);
         _enemyManager.Draw(_window);
         _animationManager.Draw(_window);
+        _scoreManager.Draw(_window);
 
         _window.Display();
     }

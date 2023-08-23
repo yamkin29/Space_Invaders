@@ -2,8 +2,7 @@
   "Height": 480,
   "Width": 640,
   "Title": "Space Invaders",
-  "PlayerSettings":
-  {
+  "PlayerSettings": {
     "Speed": 4,
     "MovingLeftButton": 0,
     "MovingRightButton": 3,
@@ -14,6 +13,19 @@
   },
   "BulletSpeed": 20,
   "BulletRadius": 3,
-  "EnemySpeed" : 5,
-  "EnemySpawnCooldown": 0.3
+  "EnemySpeed": 5,
+  "EnemySpawnCooldown": 0.3,
+  "ScoreManagerSettings": {
+    "ScorePerEnemy": 1,
+    "PositionX": 80,
+    "PositionY": 20,
+    "FontName": "FreeMonospaced",
+    "FontSize": 25,
+    "FontColor": {
+      "A": 255,
+      "R": 255,
+      "G": 255,
+      "B": 255
+    }
+  }
 }

@@ -4,11 +4,13 @@ public class CollisionHandler
 {
     private Player _player;
     private EnemyManager _enemyManager;
+    private readonly ScoreManager _scoreManager;
     
-    public CollisionHandler(Player player, EnemyManager enemyManager)
+    public CollisionHandler(Player player, EnemyManager enemyManager, ScoreManager scoreManager)
     {
         _player = player;
         _enemyManager = enemyManager;
+        _scoreManager = scoreManager;
     }
     
     private bool HasCollisionEnemyWithBullet(Enemy enemy, out Bullet bullet)
@@ -38,7 +40,7 @@ public class CollisionHandler
             {
                 _player.DestroyBullet(bullet);
                 _enemyManager.DestroyEnemy(enemies[i]);
-                i--;
+                _scoreManager.IncreaseScore();
                 continue;
             }
             

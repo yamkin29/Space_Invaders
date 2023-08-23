@@ -5,7 +5,7 @@ namespace Space_Invaders;
 
 public class TextLabel
 {
-    private const string FONT_PATH = "Ваш путь/";
+    private const string FONT_PATH = "C:\\Users\\dartw\\RiderProjects\\Space Invaders\\Space Invaders\\Assets\\Fonts\\";
     private readonly Text _text;
     
     public TextLabel(string text, string fontName, uint fontSize, Color textColor, Vector2f textPosition)
