@@ -11,16 +11,19 @@ public class EnemyManager
     private readonly float _enemySpeed;
     private readonly Vector2f _screenSize;
     private readonly Random _random = new();
+    private readonly AnimationManager _animationManager;
 
-    public EnemyManager(float spawnCooldown, float enemySpeed, Vector2f screenSize)
+    public EnemyManager(float spawnCooldown, float enemySpeed, Vector2f screenSize, AnimationManager animationManager)
     {
         _spawnCooldown = spawnCooldown;
         _enemySpeed = enemySpeed;
         _screenSize = screenSize;
+        _animationManager = animationManager;
     }
 
     public void DestroyEnemy(Enemy enemy)
     {
+        enemy.PlayDeathAnimation();
         Enemies.Remove(enemy);
     }
 
@@ -36,7 +39,7 @@ public class EnemyManager
         var randomPositionX = _random.Next(0, (int)_screenSize.X);
         var enemyTexture = TextureManager.EnemyTexture;
         var spawnPosition = new Vector2f(randomPositionX, -enemyTexture.Size.Y);
-        var enemy = new Enemy(_enemySpeed, enemyTexture, spawnPosition);
+        var enemy = new Enemy(_enemySpeed, enemyTexture, spawnPosition, _animationManager);
         Enemies.Add(enemy);
         _clock.Restart();
     }
