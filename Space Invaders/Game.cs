@@ -15,6 +15,7 @@ public class Game
     private readonly CollisionHandler _collisionHandler;
     private readonly AnimationManager _animationManager;
     private readonly ScoreManager _scoreManager;
+    private readonly Vector2f _screenSize;
 
     // Создаем котнструктор класса и переносим в него всю логику включения
     public Game(GameConfiguration gameConfiguration)
@@ -28,12 +29,15 @@ public class Game
         _background = new Sprite(TextureManager.BackgroundTexture);
 
         _player = CreatePlayer(gameConfiguration);
+        _screenSize = new Vector2f(gameConfiguration.Width, gameConfiguration.Height);
         var screenSize = new Vector2f(gameConfiguration.Width, gameConfiguration.Height);
         _animationManager = new AnimationManager();
-        _enemyManager = new EnemyManager(gameConfiguration.EnemySpawnCooldown, gameConfiguration.EnemySpeed, screenSize, _animationManager);
-        
+        _enemyManager = new EnemyManager(gameConfiguration.EnemySpawnCooldown, gameConfiguration.EnemySpeed,
+            _screenSize, _animationManager);
+
+
         _scoreManager = new ScoreManager(gameConfiguration.ScoreManagerSettings);
-        
+
         _collisionHandler = new CollisionHandler(_player, _enemyManager, _scoreManager);
     }
 
@@ -101,16 +105,22 @@ public class Game
 
         _window.Display();
     }
-    
+
     public void ShowGameOverScreen()
     {
         while (_window.IsOpen)
         {
             HandleEvents();
             _window.Clear(Color.Black);
+            ShowGameOverText();
             _window.Display();
         }
     }
 
-
+    private void ShowGameOverText()
+    {
+        var textPosition = _screenSize / 2;
+        var gameOverText = new TextLabel("Game\nOver", "FreeMonospacedBold", 80, Color.White, textPosition);
+        gameOverText.Draw(_window);
+    }
 }
