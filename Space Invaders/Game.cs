@@ -60,7 +60,7 @@ public class Game
         // Получаем события от пользователя
         // Так как все это в цикле, то мы постоянно перерисовываем окно в синий цвет
         // Ну и отображаем само окно.
-        while (_window.IsOpen)
+        while (_window.IsOpen && !_player.IsPlayerDead)
         {
             HandleEvents();
             Update();
@@ -93,4 +93,16 @@ public class Game
 
         _window.Display();
     }
+    
+    public void ShowGameOverScreen()
+    {
+        while (_window.IsOpen)
+        {
+            HandleEvents();
+            _window.Clear(Color.Black);
+            _window.Display();
+        }
+    }
+
+
 }

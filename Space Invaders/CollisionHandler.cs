@@ -39,9 +39,21 @@ public class CollisionHandler
                 _player.DestroyBullet(bullet);
                 _enemyManager.DestroyEnemy(enemies[i]);
                 i--;
+                continue;
+            }
+            
+            if (HasCollisionEnemyWithPlayer(enemies[i]))
+            {
+                _player.Destroy();
             }
         }
     }
+    
+    private bool HasCollisionEnemyWithPlayer(Enemy enemy)
+    {
+        return _player.GetGlobalBounds().Intersects(enemy.GetGlobalBounds());
+    }
+
     
     public void Update()
     {

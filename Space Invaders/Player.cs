@@ -6,6 +6,7 @@ namespace Space_Invaders;
 
 public class Player
 {
+    public bool IsPlayerDead { get; private set; }
     private Sprite _sprite;
     private readonly ShootingManager _shootingManager;
     private readonly Keyboard.Key _shootingButton;
@@ -42,6 +43,17 @@ public class Player
     public void DestroyBullet(Bullet bullet)
     {
         _shootingManager.Bullets.Remove(bullet);
+    }
+
+    public void Destroy()
+    {
+        IsPlayerDead = true;
+    }
+
+
+    public FloatRect GetGlobalBounds()
+    {
+        return _sprite.GetGlobalBounds();
     }
 
 

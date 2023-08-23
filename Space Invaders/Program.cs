@@ -11,5 +11,6 @@ class Program
         var gameConfiguration = new GameConfiguration(GAME_CONFIGURATION_JSON_PATH);
         Game game = new Game(gameConfiguration);
         game.Run();
+        game.ShowGameOverScreen();
     }
 }
