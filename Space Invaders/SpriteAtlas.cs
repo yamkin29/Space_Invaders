@@ -4,6 +4,7 @@ namespace Space_Invaders;
 
 public class SpriteAtlas
 {
+    public int Count { get; }
     private readonly Texture _atlasTexture;
     private readonly int _columns;
     private readonly int _singleSpriteWidth;
@@ -17,6 +18,7 @@ public class SpriteAtlas
 
         _singleSpriteWidth = (int)(_atlasTexture.Size.X / rows);
         _singleSpriteHeight = (int)(_atlasTexture.Size.Y / _columns);
+        Count = _columns * rows;
     }
 
     
