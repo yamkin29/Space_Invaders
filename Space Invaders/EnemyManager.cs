@@ -5,7 +5,7 @@ namespace Space_Invaders;
 
 public class EnemyManager
 {
-    private readonly List<Enemy> _enemies = new();
+    public List<Enemy> Enemies { get; } = new();
     private readonly float _spawnCooldown;
     private readonly Clock _clock = new();
     private readonly float _enemySpeed;
@@ -17,6 +17,11 @@ public class EnemyManager
         _spawnCooldown = spawnCooldown;
         _enemySpeed = enemySpeed;
         _screenSize = screenSize;
+    }
+
+    public void DestroyEnemy(Enemy enemy)
+    {
+        Enemies.Remove(enemy);
     }
 
     private void SpawnEnemy()
@@ -32,7 +37,7 @@ public class EnemyManager
         var enemyTexture = TextureManager.EnemyTexture;
         var spawnPosition = new Vector2f(randomPositionX, -enemyTexture.Size.Y);
         var enemy = new Enemy(_enemySpeed, enemyTexture, spawnPosition);
-        _enemies.Add(enemy);
+        Enemies.Add(enemy);
         _clock.Restart();
     }
 
@@ -44,12 +49,12 @@ public class EnemyManager
 
     private void UpdateEnemies()
     {
-        for (var i = 0; i < _enemies.Count; i++)
+        for (var i = 0; i < Enemies.Count; i++)
         {
-            _enemies[i].Update();
-            if (IsEnemyOutOfScreen(_enemies[i]))
+            Enemies[i].Update();
+            if (IsEnemyOutOfScreen(Enemies[i]))
             {
-                _enemies.RemoveAt(i);
+                Enemies.RemoveAt(i);
                 i--;
             }
         }
@@ -58,7 +63,7 @@ public class EnemyManager
 
     public void Draw(RenderWindow window)
     {
-        foreach (var enemy in _enemies)
+        foreach (var enemy in Enemies)
         {
             enemy.Draw(window);
         }

@@ -12,6 +12,7 @@ public class Game
     private readonly Sprite _background;
     private readonly Player _player;
     private readonly EnemyManager _enemyManager;
+    private readonly CollisionHandler _collisionHandler;
 
     // Создаем котнструктор класса и переносим в него всю логику включения
     public Game(GameConfiguration gameConfiguration)
@@ -28,6 +29,7 @@ public class Game
         var screenSize = new Vector2f(gameConfiguration.Width, gameConfiguration.Height);
         _enemyManager =
             new EnemyManager(gameConfiguration.EnemySpawnCooldown, gameConfiguration.EnemySpeed, screenSize);
+        _collisionHandler = new CollisionHandler(_player, _enemyManager);
     }
 
 
@@ -79,6 +81,7 @@ public class Game
     {
         _player.Update();
         _enemyManager.Update();
+        _collisionHandler.Update();
     }
 
     // Метод Draw() будет рисовать изображение на экране.

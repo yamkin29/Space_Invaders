@@ -12,7 +12,8 @@ public class Player
     private readonly PlayerMovement _playerMovement;
 
 
-    public Player(ShootingManager shootingManager, Keyboard.Key shootingButton, Texture texture, Vector2f playerSpawnPosition, PlayerMovement playerMovement)
+    public Player(ShootingManager shootingManager, Keyboard.Key shootingButton, Texture texture,
+        Vector2f playerSpawnPosition, PlayerMovement playerMovement)
     {
         _sprite = new Sprite(texture);
         _sprite.Position = playerSpawnPosition;
@@ -21,6 +22,10 @@ public class Player
         _playerMovement = playerMovement;
     }
 
+    public List<Bullet> GetBullets()
+    {
+        return _shootingManager.Bullets;
+    }
 
     public void Draw(RenderWindow window)
     {
@@ -32,6 +37,11 @@ public class Player
     {
         var newPosition = _playerMovement.GetNewPosition(_sprite.Position);
         _sprite.Position = newPosition;
+    }
+
+    public void DestroyBullet(Bullet bullet)
+    {
+        _shootingManager.Bullets.Remove(bullet);
     }
 
 

@@ -17,6 +17,11 @@ public class Bullet
         _bulletShape.Position = position;
     }
     
+    public FloatRect GetGlobalBounds()
+    {
+        return _bulletShape.GetGlobalBounds();
+    }
+
     public void Update()
     {
         var currentPosition = _bulletShape.Position;

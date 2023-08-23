@@ -6,7 +6,7 @@ namespace Space_Invaders;
 
 public class ShootingManager
 {
-    private readonly List<Bullet> _bullets = new();
+    public List<Bullet> Bullets { get; } = new();
     private readonly float _bulletSpeed;
     private readonly float _bulletRadius;
     private readonly float _shootingCooldown;
@@ -26,7 +26,7 @@ public class ShootingManager
         if (lastShotTime >= _shootingCooldown)
         {
             var bullet = new Bullet(bulletSpawnPosition, _bulletSpeed, _bulletRadius);
-            _bullets.Add(bullet);
+            Bullets.Add(bullet);
             _clock.Restart();
         }
     }
@@ -38,13 +38,13 @@ public class ShootingManager
 
     public void Update()
     {
-        for (var i = 0; i < _bullets.Count; i++)
+        for (var i = 0; i < Bullets.Count; i++)
         {
-            _bullets[i].Update();
+            Bullets[i].Update();
 
-            if (IsBulletOutOfScreen(_bullets[i]))
+            if (IsBulletOutOfScreen(Bullets[i]))
             {
-                _bullets.RemoveAt(i);
+                Bullets.RemoveAt(i);
                 i--;
             }
         }
@@ -52,9 +52,9 @@ public class ShootingManager
 
     public void Draw(RenderWindow window)
     {
-        for (var i = 0; i < _bullets.Count; i++)
+        for (var i = 0; i < Bullets.Count; i++)
         {
-            _bullets[i].Draw(window);
+            Bullets[i].Draw(window);
         }
     }
 }

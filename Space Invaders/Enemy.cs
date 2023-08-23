@@ -16,6 +16,11 @@ public class Enemy
         _sprite.Position = spawnPosition;
     }
 
+    public FloatRect GetGlobalBounds()
+    {
+        return _sprite.GetGlobalBounds();
+    }
+    
     private void Move()
     {
         _sprite.Position += new Vector2f(0, _enemySpeed);
